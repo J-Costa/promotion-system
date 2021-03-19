@@ -132,7 +132,6 @@ class PromotionsTest < ApplicationSystemTestCase
   end
 
   test 'generate coupons for a promotion' do 
-    skip "TODO:"
     # arrange | prepara tudo para testar
     # precisa de promocao 
     promotion = Promotion.create!(name: 'Natal', description: 'Promoção de Natal',
