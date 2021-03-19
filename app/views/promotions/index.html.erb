@@ -5,7 +5,7 @@
     <h3>Nenhuma promoção cadastrada</h3>
 <% end %>
 
-<%= @promotions.each do |promotion| %>
+<% @promotions.each do |promotion| %>
 <h3><%= link_to promotion.name, promotion %></h3>
 <dl>
     <dt>Descrição</dt>

@@ -13,11 +13,35 @@ class PromotionsController < ApplicationController
     
     def create 
         @promotion = Promotion.new(promotion_params)
-        @promotion.save!
-        redirect_to @promotion
+        if @promotion.save
+            redirect_to @promotion
+        else
+            render :new
+        end
     end
 
+    def edit
+        set_promotion
+    end
+
+    def update
+        set_promotion
+        if @promotion.update(promotion_params)
+            flash[:notice] = "Atualizado com sucesso!"
+            redirect_to @promotion
+        else
+          flash[:alert] = "Não foi possível atualizar!"
+          render 'edit'
+        end  
+    end
+
+    
+
     private
+        def set_promotion
+            @promotion = Promotion.find(params[:id])
+        end
+        
         def promotion_params
             params
                 .require(:promotion)

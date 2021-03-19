@@ -4,3 +4,6 @@
 require_relative "config/application"
 
 Rails.application.load_tasks
+
+# muda testes default
+task default: ['test', 'test:system'] 
