@@ -1,6 +1,9 @@
 <%= link_to 'Voltar', root_path %>
 <%= link_to 'Registrar uma promoção', new_promotion_path %>
 
+<%= alert %>
+<%= notice %>
+
 <% if @promotions.empty?%>
     <h3>Nenhuma promoção cadastrada</h3>
 <% end %>

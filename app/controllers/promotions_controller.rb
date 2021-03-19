@@ -30,12 +30,22 @@ class PromotionsController < ApplicationController
             flash[:notice] = "Atualizado com sucesso!"
             redirect_to @promotion
         else
-          flash[:alert] = "Não foi possível atualizar!"
-          render 'edit'
+            flash[:alert] = "Não foi possível atualizar!"
+            render 'edit'
         end  
     end
 
-    
+    def destroy
+        @promotion = set_promotion
+        if @promotion.destroy
+            flash[:notice] = "Deletado com sucesso"
+            redirect_to promotions_path
+        else
+            flash[:alert] = "Não foi possível deletar"
+            redirect_to promotions_path
+        end
+    end
+
 
     private
         def set_promotion
@@ -47,6 +57,4 @@ class PromotionsController < ApplicationController
                 .require(:promotion)
                 .permit(:name, :expiration_date, :description, :discount_rate, :code, :coupon_quantity)
         end
-        
-    
 end

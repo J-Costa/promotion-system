@@ -14,4 +14,5 @@
     <dd><%= @promotion.coupon_quantity %></dd>
 </dl>
 
-<%= button_to "Editar", edit_promotion_path(@promotion), method: :get %>
+<%= button_to "Editar promoção", edit_promotion_path(@promotion), method: :get %>
+<%= button_to "Deletar promoção", promotion_path(@promotion),  method: :delete %>
