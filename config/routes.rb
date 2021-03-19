@@ -4,4 +4,6 @@ Rails.application.routes.draw do
   resources :promotions, only: [:index, :show, :new, :create, :edit, :update, :destroy] do
     post 'generate_coupons', on: :member
   end
+
+  resources :products, only: [:index, :show, :new, :create]
 end

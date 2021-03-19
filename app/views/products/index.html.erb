@@ -1,0 +1,15 @@
+<%= link_to 'Voltar', root_path %>
+<%= link_to "Registrar um produto", new_product_path %>
+<h1>Produtos</h1>
+
+<% if @products.empty? %>
+<h3>Nenhum produto cadastrado</h3>
+<% else %>
+    <% @products.each do |product| %>
+        <h3> <%=link_to product.name, product %></h3>
+        <dl>
+            <dt>Código</dt>
+            <dd><%= product.code %></dd>
+        </dl>
+    <% end%>
+<% end%>
