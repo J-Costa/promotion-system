@@ -40,4 +40,18 @@ class PromotionTest < ActiveSupport::TestCase
     assert_includes promotion.errors[:expiration_date], 'não pode ficar em branco'
   end
 
+  test 'edit promotion code and name must be unique' do 
+    promotion_1 = Promotion.create!(name: 'Natal', description: 'Promoção de Natal',
+      code: 'NATAL10', discount_rate: 10, coupon_quantity: 100,
+      expiration_date: '22/12/2033')
+    promotion_2 = Promotion.create!(name: 'Páscoa', description: 'Promoção de páscoa',
+        code: 'PASCOA10', discount_rate: 10, coupon_quantity: 100,
+        expiration_date: '22/12/2033')
+    promotion_2.update(name: 'Natal', code:'NATAL10')
+
+      refute promotion_2.valid?
+      assert_includes promotion_2.errors[:name], 'deve ser único'
+      assert_includes promotion_2.errors[:code], 'deve ser único'
+  end
+
 end
