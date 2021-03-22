@@ -1,6 +1,4 @@
 <%= link_to 'Voltar', promotions_path %>
-<%= notice %>
-<%= alert %>
 
 <h3><%= @promotion.name %></h3>
 <dl>
@@ -18,10 +16,11 @@
 
 <%= link_to "Editar promoção", edit_promotion_path(@promotion)%>
 
+
 <%= button_to "Deletar promoção", promotion_path(@promotion),  method: :delete %>
 
 <% if @promotion.coupons.empty? %>
-    <%= link_to "Gerar cupons", generate_coupons_promotion_path(@promotion), method: :post %>
+    <%= button_to "Gerar cupons", generate_coupons_promotion_path(@promotion), method: :post %>
 <% end %>
 
 <% @promotion.coupons.each do |coupon| %>
