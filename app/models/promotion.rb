@@ -1,5 +1,5 @@
 class Promotion < ApplicationRecord
-    has_many :coupons
+    has_many :coupons, dependent: :destroy
     
     validates :code, :name, presence: {message: 'não pode ficar em branco'}, uniqueness: {message: 'deve ser único'}
     validates :discount_rate, presence: {message: 'não pode ficar em branco'}
