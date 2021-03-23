@@ -1,4 +1,4 @@
-<%= link_to 'Voltar', root_path %>
+<%= link_to t('buttons.back'), root_path %>
 
 <%= link_to "Registrar um produto", new_product_category_path %>
 <h1>Produtos</h1>
@@ -9,7 +9,7 @@
     <% @product_categories.each do |product| %>
         <h3> <%=link_to product.name, product %></h3>
         <dl>
-            <dt>Código</dt>
+            <dt><%= ProductCategory.human_attribute_name(:code) %></dt>
             <dd><%= product.code %></dd>
         </dl>
         <hr>

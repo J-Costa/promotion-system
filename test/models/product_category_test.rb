@@ -14,7 +14,7 @@ class ProductCategoryTest < ActiveSupport::TestCase
     product_category = ProductCategory.new(name: 'Produto Antifraude', code: "ANTIFRA")
 
     refute product_category.valid?
-    assert_includes product_category.errors[:code], 'deve ser único'
+    assert_includes product_category.errors[:code], 'já está em uso'
   end
 
   test 'edit product category cannot be blank' do 
@@ -32,7 +32,7 @@ class ProductCategoryTest < ActiveSupport::TestCase
     product_category_2.update(code:'ANTIFRA')
 
     refute product_category_2.valid?
-    assert_includes product_category_2.errors[:code], 'deve ser único'
+    assert_includes product_category_2.errors[:code], 'já está em uso'
   end
 
 end

@@ -16,9 +16,10 @@ class PromotionsController < ApplicationController
     def create 
         @promotion = Promotion.new(promotion_params)
         if @promotion.save
-            redirect_to @promotion
+            redirect_to @promotion, notice: t('.success')
         else
-            render :new
+            flash.now[:alert] = t('.fail')
+            render :new 
         end
     end
 
@@ -28,28 +29,24 @@ class PromotionsController < ApplicationController
 
     def update
         if @promotion.update(promotion_params)
-            flash[:notice] = "Atualizado com sucesso!"
-            redirect_to @promotion
+            redirect_to @promotion, notice: t('.success')
         else
-            flash[:alert] = "Não foi possível atualizar!"
+            flash.now[:alert] = t('.fail')
             render 'edit'
         end  
     end
 
     def destroy
         if @promotion.destroy
-            flash[:notice] = "Deletado com sucesso"
-            redirect_to promotions_path
+            redirect_to promotions_path, notice: t('.success')
         else
-            flash[:alert] = "Não foi possível deletar"
-            redirect_to promotions_path
+            redirect_to promotions_path, alert: t('.fail')
         end
     end
 
     def generate_coupons
         @promotion.generate_coupons!
-        flash[:notice] = 'Cupons gerados com sucesso'
-        redirect_to @promotion
+        redirect_to @promotion, notice: t('.success')
     end
     
 

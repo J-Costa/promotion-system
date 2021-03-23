@@ -64,7 +64,7 @@ class ProductCategoriesTest < ApplicationSystemTestCase
         click_on "Registrar um produto"
         fill_in "Nome", with: "Produto Antifraude"
         fill_in "Código", with: "ANTIFRA"
-        click_on "Criar produto"
+        click_on "Criar Produto"
 
         assert_current_path product_category_path(ProductCategory.last)
         assert_text "Produto Antifraude"
@@ -80,7 +80,7 @@ class ProductCategoriesTest < ApplicationSystemTestCase
         click_on 'Registrar um produto'
         fill_in "Nome",	with: "" 
         fill_in "Código",	with: "" 
-        click_on "Criar produto"
+        click_on "Criar Produto"
 
         assert_text 'não pode ficar em branco', count: 2
 
@@ -93,9 +93,9 @@ class ProductCategoriesTest < ApplicationSystemTestCase
         click_on 'Produtos'
         click_on "Registrar um produto"
         fill_in 'Código', with: 'ANTIFRA'
-        click_on 'Criar produto'
+        click_on 'Criar Produto'
 
-        assert_text 'deve ser único'
+        assert_text 'já está em uso'
     end
 
     test 'delete product' do

@@ -22,8 +22,8 @@ class PromotionTest < ActiveSupport::TestCase
     promotion = Promotion.new(code: 'NATAL10', name: 'Natal')
 
     refute promotion.valid?
-    assert_includes promotion.errors[:code], 'deve ser único'
-    assert_includes promotion.errors[:name], 'deve ser único'
+    assert_includes promotion.errors[:code], 'já está em uso'
+    assert_includes promotion.errors[:name], 'já está em uso'
   end
 
   test 'edit promotion attributes cannot be blank' do
@@ -50,8 +50,8 @@ class PromotionTest < ActiveSupport::TestCase
     promotion_2.update(name: 'Natal', code:'NATAL10')
 
       refute promotion_2.valid?
-      assert_includes promotion_2.errors[:name], 'deve ser único'
-      assert_includes promotion_2.errors[:code], 'deve ser único'
+      assert_includes promotion_2.errors[:name], 'já está em uso'
+      assert_includes promotion_2.errors[:code], 'já está em uso'
   end
 
   test 'generate_coupons! successfully' do 

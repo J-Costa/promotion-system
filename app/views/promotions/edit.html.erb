@@ -1,4 +1,4 @@
-<%= link_to 'Voltar', promotions_path %>
+<%= link_to t('buttons.back'), promotions_path %>
 <h4>Editar item</h4>
 
-<%= render partial: 'form', locals: {promotion: @promotion, btn: "Editar item"} %>
+<%= render partial: 'form', locals: {promotion: @promotion} %>

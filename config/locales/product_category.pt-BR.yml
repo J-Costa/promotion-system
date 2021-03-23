@@ -1,0 +1,22 @@
+---
+  pt-BR:
+    activerecord:
+      models:
+        product_category:
+          one: Produto
+          other: Produtos
+      attributes:
+        product_category:
+          name: Nome
+          code: Código
+    product_categories:
+      show:
+        delete: Deletar produto 
+        update: Editar produto
+      create:
+        success: Criado com sucesso
+      update:
+        success: Atualizado com sucesso
+      destroy:
+        success: Deletado com sucesso
+      fail: Falha na operação

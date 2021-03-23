@@ -1,10 +1,11 @@
 class ProductCategoriesController < ApplicationController
+    before_action :set_product_category, only: %i[show edit update destroy]
     def index
         @product_categories = ProductCategory.all
     end
 
     def show
-        @product_category = ProductCategory.find(params[:id])
+       
     end
 
     def new
@@ -14,35 +15,31 @@ class ProductCategoriesController < ApplicationController
     def create
         @product_category = ProductCategory.new(product_category_params)
         if @product_category.save
-            redirect_to @product_category
+            redirect_to @product_category, notice: t('.success')
         else
+            flash.now[:alert] = t('.fail')
             render :new
         end
     end
 
     def edit
-        set_product_category
+        
     end
 
     def update
-        set_product_category
         if @product_category.update(product_category_params)
-            flash[:notice] = "Atualizado com sucesso"
-            redirect_to @product_category
+            redirect_to @product_category, notice: t('.success')
         else
-            flash[:alert] = 'Não foi possível atualizar'
+            flash.now[:alert] = t('.fail')
             render 'edit'
         end
     end
 
     def destroy
-        @product_category = set_product_category
         if @product_category.destroy
-            flash[:notice] = "Deletado com sucesso"
-            redirect_to product_categories_path
+            redirect_to product_categories_path, notice: t('.success')
         else
-            flash[:alert] = "Não foi possível deletar"
-            redirect_to product_categories_path
+            redirect_to product_categories_path, alert:  t('.fail')
         end
     end
     
