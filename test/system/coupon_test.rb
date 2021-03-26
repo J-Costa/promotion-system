@@ -6,7 +6,8 @@ class CouponsTest < ApplicationSystemTestCase
 																	code: 'NATAL10', discount_rate: 10, coupon_quantity: 3,
 																	expiration_date: '22/12/2033')
 		coupon = Coupon.create!(code: 'NATAL10-0001', promotion: promotion)
-
+		
+		login_as_user
 		visit promotion_path(promotion)
 		click_on 'Desabilitar'
 
