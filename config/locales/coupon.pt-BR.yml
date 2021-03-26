@@ -11,5 +11,4 @@ pt-BR:
         active: ativo
         disabled: desabilitado
   coupons:
-    disable: 
-      success: Cupom %{code} desabilitado com sucesso
+      success: Cupom %{code} %{action} com sucesso
