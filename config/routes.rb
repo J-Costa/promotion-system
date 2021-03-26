@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   root 'home#index'
 
   resources :promotions, only: %i[index show new create edit update destroy] do
@@ -9,5 +10,6 @@ Rails.application.routes.draw do
 
   resources :coupons, only: [] do
     post 'disable', on: :member
+    post 'enable', on: :member
   end
 end

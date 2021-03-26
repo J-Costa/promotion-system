@@ -28,4 +28,7 @@
   <% if coupon.active? %>
     <%= link_to 'Desabilitar', disable_coupon_path(coupon), method: :post %>
   <% end %>
+  <% if coupon.disabled? %>
+    <%= link_to 'Habilitar', enable_coupon_path(coupon), method: :post %>
+  <% end %>
 <% end %>

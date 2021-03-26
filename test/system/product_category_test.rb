@@ -2,6 +2,7 @@ require 'application_system_test_case'
 
 class ProductCategoriesTest < ApplicationSystemTestCase
     test 'visiting products session' do 
+        login_as_user
         visit root_path
 
         assert_link "Produtos"
@@ -12,7 +13,7 @@ class ProductCategoriesTest < ApplicationSystemTestCase
     test "view products" do
             ProductCategory.create!(name: "Produto Antifraude", code: "ANTIFRA")
             
-        
+            login_as_user
             visit root_path
             click_on 'Produtos'
         
@@ -24,6 +25,7 @@ class ProductCategoriesTest < ApplicationSystemTestCase
         ProductCategory.create!(name: "Produto Antifraude", code: "ANTIFRA")
         ProductCategory.create!(name: "Produto AntiDDOS", code: "ANTIDDOS")
 
+        login_as_user
         visit root_path
         click_on 'Produtos'
         click_on 'Produto AntiDDOS'
@@ -33,6 +35,7 @@ class ProductCategoriesTest < ApplicationSystemTestCase
     end
 
     test 'no products avaible' do
+        login_as_user
         visit root_path
         click_on "Produtos"
 
@@ -41,7 +44,8 @@ class ProductCategoriesTest < ApplicationSystemTestCase
 
     test 'view products and return to home page' do
         ProductCategory.create!(name: "Produto Antifraude", code: "ANTIFRA")
-
+        
+        login_as_user
         visit root_path
         click_on "Produtos"
         click_on "Voltar"
@@ -52,6 +56,7 @@ class ProductCategoriesTest < ApplicationSystemTestCase
     test 'view product details and return to products page' do 
         product = ProductCategory.create!(name: "Produto Antifraude", code: "ANTIFRA")
 
+        login_as_user
         visit product_category_path(product)
         click_on "Voltar"
         assert_current_path product_categories_path
@@ -59,6 +64,7 @@ class ProductCategoriesTest < ApplicationSystemTestCase
 
 
     test 'create product' do
+        login_as_user
         visit root_path
         click_on "Produtos"
         click_on "Registrar um produto"
@@ -74,7 +80,8 @@ class ProductCategoriesTest < ApplicationSystemTestCase
 
     test 'create and attributes cannot be blank' do 
         ProductCategory.create!(name: "Produto Antifraude", code: "ANTIFRA")
-
+        
+        login_as_user
         visit root_path
         click_on 'Produtos'
         click_on 'Registrar um produto'
@@ -89,6 +96,7 @@ class ProductCategoriesTest < ApplicationSystemTestCase
     test 'create and code must be unique' do
         ProductCategory.create!(name: "Produto Antifraude", code: "ANTIFRA")
 
+        login_as_user
         visit root_path
         click_on 'Produtos'
         click_on "Registrar um produto"
@@ -101,6 +109,7 @@ class ProductCategoriesTest < ApplicationSystemTestCase
     test 'delete product' do
         product_category = ProductCategory.create!(name: "Produto Antifraude", code: "ANTIFRA")
 
+        login_as_user
         visit product_category_path(product_category)
         click_on "Deletar produto"
 
