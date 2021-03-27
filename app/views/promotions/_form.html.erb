@@ -1,10 +1,4 @@
-<% if @promotion.errors.any?%>
-<ul>
-    <% @promotion.errors.full_messages.each do |x| %>
-    <li><%= x %></li>
-    <% end %>
-</ul>
-<% end %>
+<%= render partial: 'shared/form_errors', locals: { object: promotion } %>
 
 <%= form_with model: @promotion do |f| %>
 <div>

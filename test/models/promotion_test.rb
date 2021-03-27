@@ -74,5 +74,17 @@ class PromotionTest < ActiveSupport::TestCase
     end
   end
 
+  test 'expiration date cannot be in the past' do
+    # usando fixture
+    # promotion = promotions(:one)
+
+    promotion = Promotion.create!(name: 'Natal', description: 'Promoção de Natal',
+                                  code: 'NATAL10', discount_rate: 10, coupon_quantity: 100,
+                                  expiration_date: '22/12/2033')
+    promotion.update(expiration_date: Date.current - 1.day)
+
+    assert_includes promotion.errors[:expiration_date], 'não pode ser no passado'
+  end
+
 
 end

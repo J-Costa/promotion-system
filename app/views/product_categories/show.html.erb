@@ -7,4 +7,4 @@
 </dl>
 
 <%= link_to t('.update'), edit_product_category_path(@product_category) %>
-<%= button_to t('.delete'), product_category_path(@product_category), method: :delete%>
+<%= button_to t('.delete'), product_category_path(@product_category), method: :delete, data: {disable_with: t('messages.disable_link'), confirm:t('messages.confirm_delete')}%>

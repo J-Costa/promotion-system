@@ -2,3 +2,16 @@
   pt-BR:
     buttons:
       back: Voltar
+      edit: Editar
+      delete: Deletar
+      disable: Desabilitar
+      enable: Habilitar
+      register: Registrar um(a) %{model}
+    messages:
+      confirm_delete: Você tem certeza que deseja deletar esse item?
+      disable_link: Estamos processando...
+    errors:
+    cant_be_in_the_past: não pode ser no passado
+    error_message:
+      one: 1 erro impediu esse(a) %{model} de ser salvo(a)
+      other: "%{count} erros impediram esse(a) %{model} de ser salvo(a)"

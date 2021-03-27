@@ -1,10 +1,4 @@
-<% if @product_category.errors.any? %>
-<ul>
-    <% @product_category.errors.full_messages.each do |error|%>
-    <li><%= error %></li>
-    <% end%>
-</ul>
-<% end %>
+<%= render partial: 'shared/form_errors', locals: { object: product_category } %>
 
 <%= form_with model: @product_category do |f| %>
 <div>
