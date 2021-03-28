@@ -1,10 +1,14 @@
 pt-BR:
   activerecord:
     models:
-      user: Usuário
+      user: 
+        one: Usuário
+        other: Usuários
     attributes:
       user:
         email: Email
         password: Senha
         password_confirmation: Confirmação de senha
         remember_me: Manter conectado
+        current_password: Senha atual
+        

@@ -1,6 +1,6 @@
 <% if user_signed_in? %>
   <%= link_to 'Sair', destroy_user_session_path, method: :delete %>
-  <%= current_user.email %>
+  <%= link_to current_user.email, edit_user_registration_path %>
   <%= link_to 'Promoções', promotions_path %>
   <%= link_to 'Produtos', product_categories_path %>
 <% else %>

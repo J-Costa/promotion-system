@@ -70,11 +70,35 @@ class AuthenticationTest < ApplicationSystemTestCase
     assert_text 'Saiu com sucesso'
   end
 
-  # TODO: Teste de falha ao registrar
-  # TODO: Teste de falha ao logar
-  # TODO: Teste o recuperar senha
-  # TODO: Teste o editar o usuário
-  # TODO: I18n do user
+  test 'user cannot login with wrong email or password' do
+    user = User.create!(email: 'joao@iugu.com.br', password:'123456' )
+
+    visit root_path
+    click_on 'Entrar'
+
+    fill_in "Email",	with: "jose@nao.iugu.com.br" 
+    fill_in "Senha",	with: "senhaerrada"
+    click_on 'Log in' 
+
+    assert_text 'Email ou senha inválida'
+  end
+
+  test 'user can edit email and password' do
+    user = User.create!(email: 'joao@iugu.com.br', password:'123456')
+    
+    login_as_user(user)
+    visit root_path
+    click_on user.email
+    fill_in "Email",	with: "jose@iugu.com.br"
+    fill_in "Senha",	with: "senhatrocada" 
+    fill_in "Confirmação de senha",	with: "senhatrocada" 
+    fill_in "Senha atual",	with: "123456" 
+    click_on 'Atualizar Usuário'
+
+    assert_text 'Sua conta foi atualizada com sucesso'
+    assert_link 'jose@iugu.com.br'
+  end
+
   # TODO: incluir name no user
   # TODO: não logar e ir para o login?
   # TODO: confirmar a conta?
