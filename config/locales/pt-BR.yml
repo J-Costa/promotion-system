@@ -10,6 +10,7 @@
     messages:
       confirm_delete: Você tem certeza que deseja deletar esse item?
       disable_link: Estamos processando...
+      items_found: "%{quantity} item(ns) encontrado(s)"
     errors:
     cant_be_in_the_past: não pode ser no passado
     error_message:

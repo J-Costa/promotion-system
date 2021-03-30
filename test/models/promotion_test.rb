@@ -86,5 +86,55 @@ class PromotionTest < ActiveSupport::TestCase
     assert_includes promotion.errors[:expiration_date], 'não pode ser no passado'
   end
 
+  test '.search exact' do
+    xmas = Promotion.create!(name: 'Natal',
+                                  description: 'Promoção de Natal',
+                                  code: 'NATAL10', discount_rate: 10,
+                                  coupon_quantity: 100,
+                                  expiration_date: '22/12/2033')
+    carnival = Promotion.create!(name: 'Carnaval', coupon_quantity: 90,
+                                    description: 'Promoção de carnavrau',
+                                    code: 'CARNA13', discount_rate: 15,
+                                    expiration_date: '22/12/2033')
+
+    result = Promotion.search('Natal')
+    assert_includes result, xmas
+    refute_includes result, carnival
+  end
+
+  test '.search partial' do
+    xmas = Promotion.create!(name: 'Natal',
+                              description: 'Promoção de Natal',
+                              code: 'NATAL10', discount_rate: 10,
+                              coupon_quantity: 100,
+                              expiration_date: '22/12/2033')
+    carnival = Promotion.create!(name: 'Carnaval', coupon_quantity: 90,
+                                  description: 'Promoção de carnavrau',
+                                  code: 'CARNA13', discount_rate: 15,
+                                  expiration_date: '22/12/2033')
+    cyber_monday = Promotion.create!(name: 'Cyber Monday', coupon_quantity: 90,
+                                      description: 'Promoção de Cyber Monday',
+                                      code: 'CYBER15', discount_rate: 15,
+                                      expiration_date: '22/12/2033')
+    result = Promotion.search('na')
+
+    assert_includes result, xmas
+    assert_includes result, carnival
+    refute_includes result, cyber_monday
+  end
+
+  test '.search finds nothing' do
+    xmas = Promotion.create!(name: 'Natal',
+                            description: 'Promoção de Natal',
+                            code: 'NATAL10', discount_rate: 10,
+                            coupon_quantity: 100,
+                            expiration_date: '22/12/2033')
+    carnival = Promotion.create!(name: 'Carnaval', coupon_quantity: 90,
+                                description: 'Promoção de carnavrau',
+                                code: 'CARNA13', discount_rate: 15,
+                                expiration_date: '22/12/2033')
+    result = Promotion.search('Cyber')
+    assert_empty result
+  end
 
 end

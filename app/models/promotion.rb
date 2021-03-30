@@ -19,14 +19,17 @@ class Promotion < ApplicationRecord
         coupons.any?
     end
 
-    def expiration_date_cannot_be_in_the_past
-      if expiration_date.present? && expiration_date < Date.current
-        errors.add(:expiration_date, I18n.t('cant_be_in_the_past'))
-      end
+    def self.search(term)
+      @promotions = Promotion.where('name LIKE ?', "%#{term}%")
     end
-
-    private
-
     
+    
+    private
+    
+      def expiration_date_cannot_be_in_the_past
+        if expiration_date.present? && expiration_date < Date.current
+          errors.add(:expiration_date, I18n.t('cant_be_in_the_past'))
+        end
+      end
     
 end
