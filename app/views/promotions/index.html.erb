@@ -1,9 +1,21 @@
 <%= link_to t('buttons.back'), root_path %>
 <%= link_to t('buttons.register', model: 'Promoção'), new_promotion_path %>
 
+<%= form_with url: search_promotions_path , method: :get do |f| %>
+  <%= f.label :search, 'Busca' %>
+  <%= f.select 'filter', ['Cupons', 'Promoções'], {selected: 'Promoções'} %>
+  <%= f.search_field :search %>
+  <%= f.submit 'Buscar' %>
+<% end %>
 
-<% if @promotions.empty?%>
-    <h3>Nenhuma promoção cadastrada</h3>
+<% if @promotions.empty? && params[:search].present? %>
+  <% if params[:search].empty? %>
+    <h3>Digite algo para buscar</h3>
+  <% else %>
+    <h3>Nenhuma promoção encotrada para o termo: <%= params[:search] %></h3>
+  <% end %>
+<% elsif @promotions.empty? && params[:search].nil? %>
+  <h3>Nenhuma promoção cadastrada</h3>
 <% end %>
 
 <% @promotions.each do |promotion| %>

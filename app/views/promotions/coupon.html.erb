@@ -1,0 +1,9 @@
+<% if @coupon == '' %>
+  <h4> Cupom: <%= params[:search] %> não encontrado</h4>
+<% else %>
+  <h2>Cupom:</h2>
+  <hr>
+  <h3><%=link_to @coupon.promotion.name, promotion_path(@coupon.promotion) %></h3>
+  <h4><%= @coupon.code %></h4>
+  <h4><%= Coupon.human_attribute_name("status.#{@coupon.status}") %></h4>
+<% end %>

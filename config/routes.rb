@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   resources :promotions, only: %i[index show new create edit update destroy] do
     post 'generate_coupons', on: :member
+    get 'search', on: :collection
   end
 
   resources :product_categories, only: %i[index show new create edit update destroy]
