@@ -51,14 +51,14 @@ class PromotionsController < ApplicationController
   end
 
   def search
-    if params[:filter] == 'Cupons'
-      @coupon = Coupon.search(params[:search])
-      
+    @term = params[:search]
+    @filter = params[:filter]
+
+    if @filter == 'Cupons'
+      @coupon = Coupon.search(@term)
       render :coupon
     else
-      @promotions = Promotion.search(params[:search])
-        flash.now[:notice] = t('messages.items_found', quantity: @promotions.count) unless @promotions.empty?
-        render :index
+      @promotions = Promotion.search(@term)
     end
   end
   

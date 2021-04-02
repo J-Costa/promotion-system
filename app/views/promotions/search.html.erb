@@ -8,14 +8,6 @@
   <%= f.submit 'Buscar' %>
 <% end %>
 
-<% if @promotions.empty? && params[:search].present? %>
-  <% if params[:search].empty? %>
-    <h3>Digite algo para buscar</h3>
-  <% else %>
-    <h3>Nenhuma promoção encotrada para o termo: <%= params[:search] %></h3>
-  <% end %>
-<% elsif @promotions.empty? && params[:search].nil? %>
-  <h3>Nenhuma promoção cadastrada</h3>
-<% end %>
+<%= t '.result', count: @promotions.count, term: @term %>
 
 <%= render @promotions %>
