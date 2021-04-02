@@ -19,6 +19,11 @@
         delete: Deletar promoção
         update: Editar promoção
         generate_coupons: Gerar cupons
+      search:
+        result:
+          zero: "Nenhuma promoção encontrada para o termo: %{term}"
+          one: "%{count} promoção encontrada para o termo: %{term}"
+          other: "%{count} promoções encontradas para o termo: %{term}"
       generate_coupons:
         success: Cupons gerados com sucesso
       create:

@@ -46,7 +46,7 @@ class PromotionsTest < ApplicationSystemTestCase
     fill_in 'Busca', with: 'natal'
     click_on 'Buscar'
 
-    assert_text '2 item(ns) encontrado(s)'
+    assert_text '2 promoções encontradas para o termo: natal'
     assert_text christmas.name
     assert_text christmassy.name
     refute_text cyber_monday.name
@@ -74,7 +74,7 @@ class PromotionsTest < ApplicationSystemTestCase
     fill_in 'Busca', with: 'zumba'
     click_on 'Buscar'
 
-    assert_text 'Nenhuma promoção encotrada para o termo: zumba'
+    assert_text 'Nenhuma promoção encontrada para o termo: zumba'
   end
 
   test 'search without login' do
