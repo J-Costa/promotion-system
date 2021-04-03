@@ -18,6 +18,7 @@
       show:
         delete: Deletar promoção
         update: Editar promoção
+        approve: Aprovar
         generate_coupons: Gerar cupons
       search:
         result:

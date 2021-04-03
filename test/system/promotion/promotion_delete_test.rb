@@ -18,11 +18,13 @@ class PromotionsTest < ApplicationSystemTestCase
   end
 
   test 'delete promotion with generated coupons' do 
-    user = login_as_user
+    user = User.create!(email: 'joao@iugu.com.br', password:'654321')
+    approver = login_as_user(User.create!(email: 'jose@iugu.com.br', password:'123456'))
     promotion = Promotion.create!(name: 'Natal', description: 'Promoção de Natal',
                                   code: 'NATAL10', discount_rate: 10, coupon_quantity: 100,
                                   expiration_date: '22/12/2033', user: user)
     visit promotion_path(promotion)
+    accept_confirm { click_on 'Aprovar' }
     click_on 'Gerar cupons'
 
     assert_text 'Cupons gerados com sucesso'

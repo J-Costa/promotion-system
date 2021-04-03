@@ -1,13 +1,13 @@
 class PromotionsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_promotion, only: %i[show edit update destroy generate_coupons]
-
+  before_action :set_promotion, only: %i[show edit update destroy generate_coupons approve]
+  before_action :can_be_approved, only: [:approve]
+  
   def index
     @promotions = Promotion.all
   end
   
   def show
-
   end
 
   def new
@@ -26,7 +26,6 @@ class PromotionsController < ApplicationController
   end
 
   def edit
-
   end
 
   def update
@@ -62,6 +61,12 @@ class PromotionsController < ApplicationController
       @promotions = Promotion.search(@term)
     end
   end
+
+  def approve
+    # PromotionApproval.create!(promotion: @promotion, user: current_user)
+    current_user.promotion_approvals.create!(promotion: @promotion)
+    redirect_to @promotion, notice: I18n.t('messages.approve_success')
+  end
   
 
   private
@@ -73,5 +78,10 @@ class PromotionsController < ApplicationController
         params
             .require(:promotion)
             .permit(:name, :expiration_date, :description, :discount_rate, :code, :coupon_quantity)
+      end
+
+      def can_be_approved
+        redirect_to @promotion,
+        alert: I18n.t('messages.non_permitted_action') unless @promotion.can_approve?(current_user)
       end
 end

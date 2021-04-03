@@ -9,6 +9,9 @@
       register: Registrar um(a) %{model}
     messages:
       confirm_delete: Você tem certeza que deseja deletar esse item?
+      confirm_approve: Tem certeza? Essa ação não pode ser desfeita
+      approve_success: Promoção aprovada com sucesso
+      non_permitted_action: Ação não permitida
       disable_link: Estamos processando...
       items_found: "%{quantity} item(ns) encontrado(s)"
     errors:

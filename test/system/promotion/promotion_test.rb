@@ -9,8 +9,12 @@ class PromotionsTest < ApplicationSystemTestCase
     promotion = Promotion.create!(name: 'Natal', description: 'Promoção de Natal',
                                   code: 'NATAL10', discount_rate: 10, coupon_quantity: 100,
                                   expiration_date: '22/12/2033', user: user)
-
+    # método create has_one 
+    promotion.create_promotion_approval(
+      user: User.create!(email: 'jose@iugu.com.br', password: '123456')
+    )
     # act | ações do teste e chegar no path
+      
       visit promotion_path(promotion)
       click_on "Gerar cupons"
 
