@@ -2,9 +2,10 @@ require 'application_system_test_case'
 
 class CouponsTest < ApplicationSystemTestCase
 	test 'disable a coupon' do
+    user = User.create!(email: 'joao@iugu.com.br', password: '124566')
 		promotion = Promotion.create!(name: 'Natal', description: 'Promoção de Natal',
 																	code: 'NATAL10', discount_rate: 10, coupon_quantity: 3,
-																	expiration_date: '22/12/2033')
+																	expiration_date: '22/12/2033', user: user)
 		coupon = Coupon.create!(code: 'NATAL10-0001', promotion: promotion)
 		
 		login_as_user
@@ -17,9 +18,10 @@ class CouponsTest < ApplicationSystemTestCase
 	end
 
 	test 'enable a coupon' do
+		user = User.create!(email: 'joao@iugu.com.br', password: '124566')
 		promotion = Promotion.create!(name: 'Natal', description: 'Promoção de Natal',
-									code: 'NATAL10', discount_rate: 10, coupon_quantity: 3,
-									expiration_date: '22/12/2033')
+																	code: 'NATAL10', discount_rate: 10, coupon_quantity: 3,
+																	expiration_date: '22/12/2033', user: user)
 		coupon = Coupon.create!(code: 'NATAL10-0001', promotion: promotion, status: 'disabled')
 		
 		login_as_user
@@ -33,9 +35,10 @@ class CouponsTest < ApplicationSystemTestCase
 
   # TODO: buscar cupom teste sistema
   test 'search for a coupon' do
-    promotion = Promotion.create!(name: 'Natal', description: 'Promoção de Natal',
-                                  code: 'NATAL10', discount_rate: 10, coupon_quantity: 3,
-                                  expiration_date: '22/12/2033')
+    user = User.create!(email: 'joao@iugu.com.br', password: '124566')
+		promotion = Promotion.create!(name: 'Natal', description: 'Promoção de Natal',
+																	code: 'NATAL10', discount_rate: 10, coupon_quantity: 3,
+																	expiration_date: '22/12/2033', user: user)
     coupon = Coupon.create!(code: 'NATAL10-0001', promotion: promotion)
 
     login_as_user
@@ -51,9 +54,10 @@ class CouponsTest < ApplicationSystemTestCase
   end
 
   test 'search for a coupon that does not exist' do
-    promotion = Promotion.create!(name: 'Natal', description: 'Promoção de Natal',
-                                  code: 'NATAL10', discount_rate: 10, coupon_quantity: 3,
-                                  expiration_date: '22/12/2033')
+    user = User.create!(email: 'joao@iugu.com.br', password: '124566')
+		promotion = Promotion.create!(name: 'Natal', description: 'Promoção de Natal',
+																	code: 'NATAL10', discount_rate: 10, coupon_quantity: 3,
+																	expiration_date: '22/12/2033', user: user)
     coupon = Coupon.create!(code: 'NATAL10-0001', promotion: promotion)
 
     login_as_user

@@ -2,11 +2,12 @@ require 'application_system_test_case'
 
 class PromotionsTest < ApplicationSystemTestCase
 	test 'delete promotion' do
+    user = login_as_user
     promotion = Promotion.create!(name: 'Natal', description: 'Promoção de Natal',
                                   code: 'NATAL10', discount_rate: 10, coupon_quantity: 100,
-                                  expiration_date: '22/12/2033')
-    login_as_user
+                                  expiration_date: '22/12/2033', user: user)
     visit promotion_path(promotion)
+
     assert_difference 'Promotion.count', -1 do
       accept_confirm { click_on 'Deletar promoção' }
       assert_text 'Deletado com sucesso'
@@ -17,10 +18,10 @@ class PromotionsTest < ApplicationSystemTestCase
   end
 
   test 'delete promotion with generated coupons' do 
+    user = login_as_user
     promotion = Promotion.create!(name: 'Natal', description: 'Promoção de Natal',
                                   code: 'NATAL10', discount_rate: 10, coupon_quantity: 100,
-                                  expiration_date: '22/12/2033')
-    login_as_user
+                                  expiration_date: '22/12/2033', user: user)
     visit promotion_path(promotion)
     click_on 'Gerar cupons'
 

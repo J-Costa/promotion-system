@@ -25,9 +25,6 @@ class PromotionsTest < ApplicationSystemTestCase
   end
 
   test 'create and attributes cannot be blank' do
-    Promotion.create!(name: 'Natal', description: 'Promoção de Natal',
-                      code: 'NATAL10', discount_rate: 10, coupon_quantity: 100,
-                      expiration_date: '22/12/2033')
     
     login_as_user
     visit root_path
@@ -45,11 +42,11 @@ class PromotionsTest < ApplicationSystemTestCase
   end
 
   test 'create and code must be unique' do
+    user = login_as_user
     Promotion.create!(name: 'Natal', description: 'Promoção de Natal',
                       code: 'NATAL10', discount_rate: 10, coupon_quantity: 100,
-                      expiration_date: '22/12/2033')
+                      expiration_date: '22/12/2033', user: user)
 
-    login_as_user
     visit root_path
     click_on 'Promoções'
     click_on 'Registrar um(a) Promoção'

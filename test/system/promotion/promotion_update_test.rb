@@ -2,13 +2,13 @@ require 'application_system_test_case'
 
 class PromotionsTest < ApplicationSystemTestCase
 	test 'update promotions' do
+    user = login_as_user
     promotion = Promotion.create!(name: 'Natal',
                                   description: 'Promoção de Natal',
                                   code: 'NATAL10', discount_rate: 10,
                                   coupon_quantity: 100,
-                                  expiration_date: '22/12/2033')
+                                  expiration_date: '22/12/2033', user:user)
 
-    login_as_user
     visit root_path
     click_on 'Promoções'
     click_on promotion.name
@@ -31,13 +31,13 @@ class PromotionsTest < ApplicationSystemTestCase
   end
   
   test 'update and attributes cannot be blank' do
+    user = login_as_user
     promotion = Promotion.create!(name: 'Natal',
                                   description: 'Promoção de Natal',
                                   code: 'NATAL10', discount_rate: 10,
                                   coupon_quantity: 100,
-                                  expiration_date: '22/12/2033')
+                                  expiration_date: '22/12/2033', user: user)
 
-    login_as_user
     visit root_path
     click_on 'Promoções'
     click_on promotion.name
@@ -54,17 +54,17 @@ class PromotionsTest < ApplicationSystemTestCase
   end
 
   test 'update and code/name must be unique' do
+    user = login_as_user
     promotion = Promotion.create!(name: 'Natal',
                                   description: 'Promoção de Natal',
                                   code: 'NATAL10', discount_rate: 10,
                                   coupon_quantity: 100,
-                                  expiration_date: '22/12/2033')
+                                  expiration_date: '22/12/2033', user: user)
     Promotion.create!(name: 'Cyber Monday', coupon_quantity: 100,
                       description: 'Promoção de Cyber Monday',
                       code: 'CYBER15', discount_rate: 15,
-                      expiration_date: '22/12/2033')
+                      expiration_date: '22/12/2033', user: user)
 
-    login_as_user
     visit root_path
     click_on 'Promoções'
     click_on promotion.name
@@ -77,11 +77,12 @@ class PromotionsTest < ApplicationSystemTestCase
   end
 
   test 'can not edit promotion without login' do
+    user = User.create(email: 'joao@iugu.com.br', password: '123456')
     promotion = Promotion.create!(name: 'Natal',
                                   description: 'Promoção de Natal',
                                   code: 'NATAL10', discount_rate: 10,
                                   coupon_quantity: 100,
-                                  expiration_date: '22/12/2033')
+                                  expiration_date: '22/12/2033', user: user)
 
     visit edit_promotion_path(promotion)
 

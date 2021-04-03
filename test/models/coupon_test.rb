@@ -1,11 +1,13 @@
 require "test_helper"
 
 class CouponTest < ActiveSupport::TestCase
-  # TODO: teste unitário coupon
   test 'search for a exact coupon' do
-    promotion = Promotion.create!(name: 'Natal', description: 'Promoção de Natal',
-                                  code: 'NATAL10', discount_rate: 10, coupon_quantity: 10,
-                                  expiration_date: '22/12/2033')
+    user = User.create!(email: 'joao@iugu.com.br', password: '123456')
+    promotion = Promotion.create!(name: 'Natal',
+                                  description: 'Promoção de natal',
+                                  code: 'NATAL10', discount_rate: 15,
+                                  coupon_quantity: 5, expiration_date: '22/12/2033', 
+                                  user: user)
     coupon = Coupon.create!(code: 'NATAL10-0001', promotion: promotion)
     
     result = Coupon.search('NATAL10-0001')
@@ -14,9 +16,12 @@ class CouponTest < ActiveSupport::TestCase
   end
 
   test 'search for a exact coupon and dont find' do
-    promotion = Promotion.create!(name: 'Natal', description: 'Promoção de Natal',
-                                  code: 'NATAL10', discount_rate: 10, coupon_quantity: 10,
-                                  expiration_date: '22/12/2033')
+    user = User.create!(email: 'joao@iugu.com.br', password: '123456')
+    promotion = Promotion.create!(name: 'Natal',
+                                  description: 'Promoção de natal',
+                                  code: 'NATAL10', discount_rate: 15,
+                                  coupon_quantity: 5, expiration_date: '22/12/2033', 
+                                  user: user)
     coupon = Coupon.create!(code: 'NATAL10-0001', promotion: promotion)
     
     result = Coupon.search('NATAL10-0000')

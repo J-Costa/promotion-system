@@ -26,10 +26,11 @@ class PromotionFlowTest < ActionDispatch::IntegrationTest
   end
 
   test 'cannot generate coupons without login' do
+    user = User.create!(email: 'joao@iugu.com.br', password: '123456')
     promotion = Promotion.create!(name: 'Natal',
                                   description: 'Promoção de natal',
                                   code: 'NATAL10', discount_rate: 15,
-                                  coupon_quantity: 5, expiration_date: '22/12/2033')
+                                  coupon_quantity: 5, expiration_date: '22/12/2033', user: user)
 
     post generate_coupons_promotion_path(promotion)
 
@@ -37,11 +38,11 @@ class PromotionFlowTest < ActionDispatch::IntegrationTest
   end
 
   test 'can generate coupons with login' do
-    login_as_user
+    user = login_as_user
     promotion = Promotion.create!(name: 'Natal',
                                   description: 'Promoção de natal',
                                   code: 'NATAL10', discount_rate: 15,
-                                  coupon_quantity: 5, expiration_date: '22/12/2033')
+                                  coupon_quantity: 5, expiration_date: '22/12/2033', user: user)
 
     post generate_coupons_promotion_path(promotion)
 
@@ -52,10 +53,11 @@ class PromotionFlowTest < ActionDispatch::IntegrationTest
   end
 
   test 'cannot update promotion without login' do
+    user = User.create!(email: 'joao@iugu.com.br', password: '123456')
     promotion = Promotion.create!(name: 'Natal',
                                   description: 'Promoção de natal',
                                   code: 'NATAL10', discount_rate: 15,
-                                  coupon_quantity: 5, expiration_date: '22/12/2033')
+                                  coupon_quantity: 5, expiration_date: '22/12/2033', user: user)
 
     patch promotion_path(promotion)
 
@@ -63,10 +65,12 @@ class PromotionFlowTest < ActionDispatch::IntegrationTest
   end
 
   test 'cannot delete promotion without login' do
+    user = User.create!(email: 'joao@iugu.com.br', password: '123456')
     promotion = Promotion.create!(name: 'Natal',
                                   description: 'Promoção de natal',
                                   code: 'NATAL10', discount_rate: 15,
-                                  coupon_quantity: 5, expiration_date: '22/12/2033')
+                                  coupon_quantity: 5, expiration_date: '22/12/2033', 
+                                  user: user)
 
     delete promotion_path(promotion)
     

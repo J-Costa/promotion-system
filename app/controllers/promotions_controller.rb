@@ -15,7 +15,8 @@ class PromotionsController < ApplicationController
   end
   
   def create 
-    @promotion = Promotion.new(promotion_params)
+    @promotion = current_user.promotions.new(promotion_params)
+    # ou double splat** Promotion.new(**promotion_params, user: current_user)
     if @promotion.save
       redirect_to @promotion, notice: t('.success')
     else
