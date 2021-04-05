@@ -77,7 +77,18 @@ class PromotionFlowTest < ActionDispatch::IntegrationTest
     assert_redirected_to new_user_session_path
   end
   
-  # TODO: teste de login da aprovação de promoção
+  test 'cant approve promotion without login' do
+    user = User.create!(email: 'joao@iugu.com.br', password: '123456')
+    promotion = Promotion.create!(name: 'Natal',
+                                  description: 'Promoção de natal',
+                                  code: 'NATAL10', discount_rate: 15,
+                                  coupon_quantity: 5, expiration_date: '22/12/2033', 
+                                  user: user)
+
+    post approve_promotion_path(promotion)
+
+    assert_redirected_to new_user_session_path
+  end
 
   test 'cannot aprove if owner' do
     user = user = User.create!(email: 'joao@iugu.com.br', password: '123456')

@@ -31,9 +31,8 @@ class CouponsTest < ApplicationSystemTestCase
 		assert_text "Cupom #{coupon.code} ativado com sucesso"
 		assert_text 'NATAL10-0001 (ativo)'
 		assert_no_link 'Habilitar'
-  end
+  	end
 
-  # TODO: buscar cupom teste sistema
   test 'search for a coupon' do
     user = User.create!(email: 'joao@iugu.com.br', password: '124566')
 		promotion = Promotion.create!(name: 'Natal', description: 'Promoção de Natal',

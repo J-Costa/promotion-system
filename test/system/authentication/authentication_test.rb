@@ -4,6 +4,7 @@ class AuthenticationTest < ApplicationSystemTestCase
   test 'user sign up' do
     visit root_path
     click_on 'Cadastrar'
+    fill_in 'Nome', with: 'Jane Doe'
     fill_in 'Email', with: 'jane.doe@iugu.com.br'
     fill_in 'Senha', with: 'password'
     fill_in 'Confirmação de senha', with: 'password'
@@ -84,11 +85,12 @@ class AuthenticationTest < ApplicationSystemTestCase
   end
 
   test 'user can edit email and password' do
-    user = User.create!(email: 'joao@iugu.com.br', password:'123456')
+    user = User.create!(name: 'joao silva', email: 'joao@iugu.com.br', password:'123456')
     
     login_as_user(user)
     visit root_path
     click_on user.email
+    fill_in "Nome",	with: "jose maria"
     fill_in "Email",	with: "jose@iugu.com.br"
     fill_in "Senha",	with: "senhatrocada" 
     fill_in "Confirmação de senha",	with: "senhatrocada" 
@@ -99,7 +101,6 @@ class AuthenticationTest < ApplicationSystemTestCase
     assert_link 'jose@iugu.com.br'
   end
 
-  # TODO: incluir name no user
   # TODO: não logar e ir para o login?
   # TODO: confirmar a conta?
   # TODO: mandar email?
