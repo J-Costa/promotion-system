@@ -14,7 +14,7 @@ class PromotionApiTest < ActionDispatch::IntegrationTest
 
     assert_response :success
     body = JSON.parse(response.body, symbolize_names: true)
-    assert_equal coupon.code, body[:code]
+    assert_equal promotion.discount_rate.to_s, body[:discount_rate]
   end
 
   # TODO: crud em json, desafios, tempo do vídeo sessão 12 02:09:29
