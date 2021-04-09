@@ -2,31 +2,29 @@ class PromotionsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_promotion, only: %i[show edit update destroy generate_coupons approve]
   before_action :can_be_approved, only: [:approve]
-  
+
   def index
     @promotions = Promotion.all
   end
-  
-  def show
-  end
+
+  def show; end
 
   def new
     @promotion = Promotion.new
   end
-  
-  def create 
+
+  def create
     @promotion = current_user.promotions.new(promotion_params)
     # ou double splat** Promotion.new(**promotion_params, user: current_user)
     if @promotion.save
       redirect_to @promotion, notice: t('.success')
     else
       flash.now[:alert] = t('.fail')
-      render :new 
+      render :new
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @promotion.update(promotion_params)
@@ -34,7 +32,7 @@ class PromotionsController < ApplicationController
     else
       flash.now[:alert] = t('.fail')
       render 'edit'
-    end  
+    end
   end
 
   def destroy
@@ -65,23 +63,25 @@ class PromotionsController < ApplicationController
   def approve
     # PromotionApproval.create!(promotion: @promotion, user: current_user)
     current_user.promotion_approvals.create!(promotion: @promotion)
+    PromotionMailer.approval_email(promotion: @promotion, approver: current_user).deliver_now
     redirect_to @promotion, notice: I18n.t('messages.approve_success')
   end
-  
 
   private
-      def set_promotion
-        @promotion = Promotion.find(params[:id])
-      end
-      
-      def promotion_params
-        params
-            .require(:promotion)
-            .permit(:name, :expiration_date, :description, :discount_rate, :code, :coupon_quantity)
-      end
 
-      def can_be_approved
-        redirect_to @promotion,
-        alert: I18n.t('messages.non_permitted_action') unless @promotion.can_approve?(current_user)
-      end
+    def set_promotion
+      @promotion = Promotion.find(params[:id])
+    end
+
+    def promotion_params
+      params
+        .require(:promotion)
+        .permit(:name, :expiration_date, :description, :discount_rate,
+                :code, :coupon_quantity)
+    end
+
+    def can_be_approved
+      redirect_to @promotion, alert: I18n.t('messages.non_permitted_action') unless
+      @promotion.can_approve?(current_user)
+    end
 end
