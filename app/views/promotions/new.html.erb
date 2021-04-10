@@ -1,4 +1,4 @@
-<%= link_to t('buttons.back'), promotions_path %>
+<%= link_to t('buttons.back'), promotions_path, class: 'btn btn-secondary' %>
 <h1>Registrar uma promoção</h1>
 
 <%= render partial: 'form', locals: {promotion: @promotion} %>

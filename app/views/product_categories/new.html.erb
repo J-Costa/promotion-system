@@ -1,4 +1,4 @@
-<%= link_to t('buttons.back'), product_categories_path %>
+<%= link_to t('buttons.back'), product_categories_path, class: 'btn btn-secondary' %>
 <h4>Registrar um produto</h4>
 
 <%= render partial: 'form', locals: { product_category: @product_category} %>

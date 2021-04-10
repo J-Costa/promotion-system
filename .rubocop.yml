@@ -9,13 +9,18 @@ AllCops:
     - 'db/**/*'
     - 'node_modules/**/*'
     - 'vendor/**/*'
+
 Style/AsciiComments:
   Enabled: false
+
 Style/ClassAndModuleChildren:
   EnforcedStyle: compact
+
 Layout/IndentationConsistency:
   EnforcedStyle: indented_internal_methods
+
 Style/Documentation:
   Enabled: false
+  
 Style/FrozenStringLiteralComment:
   Enabled: false

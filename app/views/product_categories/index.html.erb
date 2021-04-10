@@ -1,6 +1,6 @@
-<%= link_to t('buttons.back'), root_path %>
+<%= link_to t('buttons.back'), root_path, class: 'btn btn-secondary' %>
 
-<%= link_to t('buttons.register', model: 'Produto'), new_product_category_path %>
+<%= link_to t('buttons.register', model: 'Produto'), new_product_category_path, class: 'btn btn-primary' %>
 <h1>Produtos</h1>
 
 <% if @product_categories.empty? %>

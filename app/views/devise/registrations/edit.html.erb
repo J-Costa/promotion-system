@@ -36,12 +36,16 @@
   </div>
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit 'Atualizar cadastro', class: 'btn btn-success' %>
   </div>
 <% end %>
 
 <h3>Cancelar minha conta</h3>
 
-<p>Não está satisfeito? <%= button_to "Cancelar minha conta", registration_path(resource_name), data: { confirm: "Você tem certeza?" }, method: :delete %></p>
+<p>Não está satisfeito? <%= button_to "Cancelar minha conta", 
+                            registration_path(resource_name), 
+                            data: { confirm: "Você tem certeza?" }, 
+                            method: :delete, 
+                            class: 'btn btn-danger' %></p>
 
-<%= link_to t('buttons.back'), :back %>
+<%= link_to t('buttons.back'), :back, class: 'btn btn-secondary' %>

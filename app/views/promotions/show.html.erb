@@ -1,4 +1,4 @@
-<%= link_to t('buttons.back'), promotions_path %>
+<%= link_to t('buttons.back'), promotions_path, class: 'btn btn-secondary' %>
 
 <h3><%= @promotion.name %></h3>
 <dl>
@@ -17,23 +17,38 @@
 <% if @promotion.approved? %>
   <p>Aprovada por: <%= @promotion.approver.email %> </p>
   <% if @promotion.coupons.empty? %>
-    <%= button_to t('.generate_coupons'), generate_coupons_promotion_path(@promotion), method: :post, data: {disable_with: t('messages.disable_link')} %>
+    <%= button_to t('.generate_coupons'), 
+      generate_coupons_promotion_path(@promotion), 
+      method: :post, 
+      data: {disable_with: t('messages.disable_link')}, 
+      class: 'btn btn-success' %>
   <% end %>
 <% elsif @promotion.can_approve?(current_user) %>
-  <%= link_to t('.approve'), approve_promotion_path, method: :post,  data: {confirm: t('messages.confirm_approve')} %>
+  <%= link_to t('.approve'), approve_promotion_path, 
+                             method: :post,
+                             data: {confirm: t('messages.confirm_approve')}, 
+                             class: 'btn btn-success' %>
 <% end %>
-<%= link_to t('.update'), edit_promotion_path(@promotion) %>
+<%= link_to t('.update'), edit_promotion_path(@promotion),
+                          class: 'btn btn-primary' %>
 
-<%= button_to t('.delete'), promotion_path(@promotion),  method: :delete, data: {disable_with: t('messages.disable_link'), 
-                                                                                confirm: t('messages.confirm_delete')} %>
+<%= button_to t('.delete'), promotion_path(@promotion), 
+                            method: :delete, 
+                            data: {disable_with: t('messages.disable_link'), 
+                            confirm: t('messages.confirm_delete')}, 
+                            class: 'btn btn-danger' %>
 
 
 <% @promotion.coupons.each do |coupon| %>
 <p><%= coupon.code %> (<%= Coupon.human_attribute_name("status.#{coupon.status}")%>)</p>
   <% if coupon.active? %>
-    <%= link_to t('buttons.disable'), disable_coupon_path(coupon), method: :post, data:{disable_with: t('messages.disable_link')} %>
+    <%= link_to t('buttons.disable'), disable_coupon_path(coupon), method: :post, 
+                                      data:{disable_with: t('messages.disable_link')}, 
+                                      class: 'btn btn-primary' %>
   <% end %>
   <% if coupon.disabled? %>
-    <%= link_to t('buttons.enable'), enable_coupon_path(coupon), method: :post, data:{disable_with: t('messages.disable_link')} %>
+    <%= link_to t('buttons.enable'), enable_coupon_path(coupon), method: :post, 
+                                     data:{disable_with: t('messages.disable_link')}, 
+                                     class: 'btn btn-primary' %>
   <% end %>
 <% end %>
