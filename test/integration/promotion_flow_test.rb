@@ -2,12 +2,12 @@ require 'test_helper'
 
 class PromotionFlowTest < ActionDispatch::IntegrationTest
   def setup
-    @promotion_params =
-    { promotion: { name: 'Natal', description: 'Promoção de natal',
-                   code: 'NATAL10', discount_rate: 15, coupon_quantity: 5,
-                   expiration_date: '22/12/2033' } }
+    @promotion_params = { promotion: 
+                        { name: 'Natal', description: 'Promoção de natal',
+                          code: 'NATAL10', discount_rate: 15, coupon_quantity: 5,
+                          expiration_date: '22/12/2033' } }
   end
-  
+
   test 'can create a promotion' do
     login_as_user
     post '/promotions', params: setup
@@ -69,20 +69,20 @@ class PromotionFlowTest < ActionDispatch::IntegrationTest
     promotion = Promotion.create!(name: 'Natal',
                                   description: 'Promoção de natal',
                                   code: 'NATAL10', discount_rate: 15,
-                                  coupon_quantity: 5, expiration_date: '22/12/2033', 
+                                  coupon_quantity: 5, expiration_date: '22/12/2033',
                                   user: user)
 
     delete promotion_path(promotion)
-    
+
     assert_redirected_to new_user_session_path
   end
-  
+
   test 'cant approve promotion without login' do
     user = User.create!(email: 'joao@iugu.com.br', password: '123456')
     promotion = Promotion.create!(name: 'Natal',
                                   description: 'Promoção de natal',
                                   code: 'NATAL10', discount_rate: 15,
-                                  coupon_quantity: 5, expiration_date: '22/12/2033', 
+                                  coupon_quantity: 5, expiration_date: '22/12/2033',
                                   user: user)
 
     post approve_promotion_path(promotion)
@@ -95,7 +95,7 @@ class PromotionFlowTest < ActionDispatch::IntegrationTest
     promotion = Promotion.create!(name: 'Natal',
                                   description: 'Promoção de natal',
                                   code: 'NATAL10', discount_rate: 15,
-                                  coupon_quantity: 5, expiration_date: '22/12/2033', 
+                                  coupon_quantity: 5, expiration_date: '22/12/2033',
                                   user: user)
     login_as_user(user)
     post approve_promotion_path(promotion)

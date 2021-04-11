@@ -1,3 +1,5 @@
+require 'test_helper'
+
 class PromotionApiTest < ActionDispatch::IntegrationTest
   test 'show promotions' do
     user = User.create!(email: 'joao@iugu.com.br', password: '123456')
@@ -5,12 +7,12 @@ class PromotionApiTest < ActionDispatch::IntegrationTest
                       description: 'Promoção de natal',
                       code: 'NATAL10', discount_rate: 15,
                       coupon_quantity: 5, expiration_date: '22/12/2033',
-                      user: user)
+                      user_id: 1)
     Promotion.create!(name: 'Carnaval',
                       description: 'Carnaval',
                       code: 'CARNA10', discount_rate: 10,
                       coupon_quantity: 5, expiration_date: '22/12/2033',
-                      user: user)
+                      user_id: user.id)
 
     get '/api/v1/promotions'
 
@@ -36,7 +38,7 @@ class PromotionApiTest < ActionDispatch::IntegrationTest
                       description: 'Promoção de natal',
                       code: 'NATAL10', discount_rate: 15,
                       coupon_quantity: 5, expiration_date: '22/12/2033',
-                      user: user)
+                      user_id: user.id)
     get '/api/v1/promotions/NATAL10'
 
     assert_response :success
