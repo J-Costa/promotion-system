@@ -14,13 +14,13 @@
     <%= render 'shared/nav' %>
     <div class="container">
       <% if notice %>
-        <div class="alert alert-info">
-          <p><%= notice %></p>
+        <div class="alert alert-info" role="alert">
+          <%= notice %>
         </div>
       <% end %>
       <% if alert %>
-        <div class="alert alert-danger">
-          <p><%= alert %></p>
+        <div class="alert alert-danger" role="alert">
+          <%= alert %>
         </div>
       <% end %>
       <%= yield %>
