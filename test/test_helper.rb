@@ -17,7 +17,8 @@ class ActiveSupport::TestCase
   include Warden::Test::Helpers
   include LoginMacros
   # Run tests in parallel with specified workers
-  parallelize(workers: :number_of_processors)
+  # parallelize(workers: :number_of_processors)
+  parallelize(workers: 1)
 
   parallelize_setup do |worker|
     SimpleCov.command_name "#{SimpleCov.command_name}-#{worker}"

@@ -49,7 +49,7 @@ class PromotionFlowTest < ActionDispatch::IntegrationTest
     assert_response 302
     follow_redirect!
     assert_response :success
-    assert_select 'p', 'Cupons gerados com sucesso'
+    assert_select 'div', 'Cupons gerados com sucesso'
   end
 
   test 'cannot update promotion without login' do
