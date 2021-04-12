@@ -1,7 +1,7 @@
 require 'application_system_test_case'
 
 class PromotionsTest < ApplicationSystemTestCase
-	test 'delete promotion' do
+  test 'delete promotion' do
     user = login_as_user
     promotion = Promotion.create!(name: 'Natal', description: 'Promoção de Natal',
                                   code: 'NATAL10', discount_rate: 10, coupon_quantity: 100,
@@ -17,9 +17,9 @@ class PromotionsTest < ApplicationSystemTestCase
     assert_no_text 'Promoção de Natal'
   end
 
-  test 'delete promotion with generated coupons' do 
-    user = User.create!(email: 'joao@iugu.com.br', password:'654321')
-    approver = login_as_user(User.create!(email: 'jose@iugu.com.br', password:'123456'))
+  test 'delete promotion with generated coupons' do
+    user = User.create!(email: 'joao@iugu.com.br', password: '654321')
+    login_as_user(User.create!(email: 'jose@iugu.com.br', password: '123456'))
     promotion = Promotion.create!(name: 'Natal', description: 'Promoção de Natal',
                                   code: 'NATAL10', discount_rate: 10, coupon_quantity: 100,
                                   expiration_date: '22/12/2033', user: user)
@@ -42,4 +42,18 @@ class PromotionsTest < ApplicationSystemTestCase
     assert_no_text 'Natal'
     assert_no_text 'Promoção de Natal'
   end
+  # TODO: teste para falha do destroy
+  # test 'check error on delete' do
+  #   user = login_as_user
+  #   promotion = Promotion.create!(name: 'Natal', description: 'Promoção de Natal',
+  #                                 code: 'NATAL10', discount_rate: 10, coupon_quantity: 100,
+  #                                 expiration_date: '22/12/2033', user: user)
+  #   visit promotion_path(promotion)
+
+  #   promotion.stub :destroy, false do
+  #     dismiss_confirm { click_on 'Deletar promoção' }
+  #     assert_equal false, promotion.destroyed?
+  #     assert_text 'Falha na operação'
+  #   end
+  # end
 end
